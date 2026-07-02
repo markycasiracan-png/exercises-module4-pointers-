@@ -1,45 +1,59 @@
 #include <stdio.h>
 
-int isArrayPalindrome(int *arr, int size) {
-    if (size <= 1) return 1;
-
-    int *ptr_start = arr;
-    int *ptr_end = arr + size - 1;
-
-    while (ptr_start < ptr_end) {
-        if (*ptr_start != *ptr_end) {
-            return 0;
-        }
-        ptr_start++;
-        ptr_end--;
+int isPalindrome(int *arr, int size) {
+    int *left = arr, *right = arr + size - 1;
+     int result = 1;
+    while (left < right) {
+        if (*left != *right) 
+        return 0;
+        left++;
+        right--;
     }
-
     return 1;
 }
-void testArray(int *arr, int size, int testNum) {
-    printf("Array %d: ", testNum);
-    if (isArrayPalindrome(arr, size)) {
-        printf("Is a palindrome\n");
-    } else {
-        printf("Is NOT a palindrome\n");
-    }
-}
 int main() {
-    int a1[] = {1, 2, 3, 2, 1};
-    int a2[] = {5, 4, 4, 5};
-    int a3[] = {1, 2, 3, 4, 5};
-    int a4[] = {7};
-    int a5[] = {9, 9};
-    int a6[] = {3, 7};
-    int a7[] = {1, 2, 3, 4, 5, 4, 3, 2, 1};
+    int t1[] = {1,2,3,2,1}, 
+        t2[] = {5,4,4,5},
+        t3[] = {1,2,3,4,5},
+        t4[] = {7}, 
+        t5[] = {9,9}, 
+        t6[] = {3,7},
+        t7[] = {1,2,3,4,5,4,3,2,1};
 
-    testArray(a1, sizeof(a1) / sizeof(a1[0]), 1);
-    testArray(a2, sizeof(a2) / sizeof(a2[0]), 2);
-    testArray(a3, sizeof(a3) / sizeof(a3[0]), 3);
-    testArray(a4, sizeof(a4) / sizeof(a4[0]), 4);
-    testArray(a5, sizeof(a5) / sizeof(a5[0]), 5);
-    testArray(a6, sizeof(a6) / sizeof(a6[0]), 6);
-    testArray(a7, sizeof(a7) / sizeof(a7[0]), 7);
+    if (isPalindrome(t1, 5))
+        printf("%-20s -> PALINDROME         | Reads same forwards/backwards\n", "{1,2,3,2,1}");
+    else
+        printf("%-20s -> NOT PALINDROME\n", "{1,2,3,2,1}");
+
+    if (isPalindrome(t2, 4))
+        printf("%-20s -> PALINDROME         | Even length palindrome\n", "{5,4,4,5}");
+    else
+        printf("%-20s -> NOT PALINDROME\n", "{5,4,4,5}");
+
+    if (isPalindrome(t3, 5))
+        printf("%-20s -> PALINDROME\n", "{1,2,3,4,5}");
+    else
+        printf("%-20s -> NOT PALINDROME     | 1 ≠ 5, fails immediately\n", "{1,2,3,4,5}");
+
+    if (isPalindrome(t4, 1))
+        printf("%-20s -> PALINDROME         | Single element always palindrome\n", "{7}");
+    else
+        printf("%-20s -> NOT PALINDROME\n", "{7}");
+
+    if (isPalindrome(t5, 2))
+        printf("%-20s -> PALINDROME         | Identical elements\n", "{9,9}");
+    else
+        printf("%-20s -> NOT PALINDROME\n", "{9,9}");
+
+    if (isPalindrome(t6, 2))
+        printf("%-20s -> PALINDROME\n", "{3,7}"); 
+    else
+        printf("%-20s -> NOT PALINDROME     | 3 ≠ 7\n", "{3,7}");
+
+    if (isPalindrome(t7, 9))
+        printf("%-20s -> PALINDROME         | Longer palindrome\n", "{1,2,3,4,5,4,3,2,1}");
+    else
+        printf("%-20s -> NOT PALINDROME\n", "{1,2,3,4,5,4,3,2,1}");
 
     return 0;
 }
